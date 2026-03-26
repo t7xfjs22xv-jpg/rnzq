@@ -17,6 +17,9 @@
         <div class="icon-group">
             <i class="fas fa-camera-retro icon-btn" title="Photobooth" onclick="togglePhotobooth()"></i>
             <i class="fas fa-paper-plane icon-btn" title="Send Song & Message" onclick="toggleMessages()"></i>
+            <a href="{% url 'inbox' %}" style="text-decoration: none;">
+                <i class="fas fa-inbox icon-btn" title="View Messages" style="color: #ff85a2;"></i>
+            </a>
         </div>
 
         <div id="welcome-message" class="premium-text">
@@ -29,43 +32,39 @@
             <span class="close-btn" onclick="toggleMessages()">&times;</span>
             <h2 class="petal-subtitle">Send a Song 🎀</h2>
             
-            <div class="search-group">
-                <input type="text" id="recipient-search" placeholder="Search for a friend..." class="premium-input">
-            </div>
-            
-            <form id="message-form" method="POST">
+            <form id="message-form" method="POST" action="{% url 'home' %}">
                 {% csrf_token %}
                 <div class="input-wrapper">
                     <label class="premium-label">For Whom: <span class="required-star">*</span></label>
                     <input type="text" id="for-whom-field" name="for_whom" placeholder="Recipient's name" required class="premium-input-field">
                 </div>
-                <textarea id="message-field" name="message" placeholder="Type your sweet message or song link... 🌸" class="premium-textarea"></textarea>
+                <textarea id="message-field" name="message" placeholder="Type your sweet message or song link... 🌸" class="premium-textarea" required></textarea>
                 <button type="submit" class="premium-save-btn">Save Message 💾</button>
             </form>
         </div>
     </div>
 
     <div id="photobooth-panel" class="modal-panel hidden">
-    <div class="panel-content glass-card">
-        <span class="close-btn" onclick="togglePhotobooth()">&times;</span>
-        <h2 class="petal-subtitle">PetalBooth 📸</h2>
+        <div class="panel-content glass-card">
+            <span class="close-btn" onclick="togglePhotobooth()">&times;</span>
+            <h2 class="petal-subtitle">PetalBooth 📸</h2>
 
-        <div class="booth-container">
-            <video id="video-feed" autoplay playsinline class="photo-view"></video>
-            <canvas id="snapshot-canvas" class="hidden"></canvas>
+            <div class="booth-container">
+                <video id="video-feed" autoplay playsinline class="photo-view"></video>
+                <canvas id="snapshot-canvas" class="hidden"></canvas>
+            </div>
+
+            <div class="effect-selectors">
+                <button class="effect-btn active" onclick="applyFilter('none')">Normal</button>
+                <button class="effect-btn" onclick="applyFilter('nokia')">Nokia</button>
+                <button class="effect-btn" onclick="applyFilter('vintage')">Vintage</button>
+                <button class="effect-btn" onclick="applyFilter('sony')">Sony</button>
+                <button class="effect-btn" onclick="applyFilter('blue3k')">Blue 3K</button>
+            </div>
+
+            <button class="btn-capture" onclick="takePhoto()">Capture! 💖</button>
         </div>
-
-        <div class="effect-selectors">
-            <button class="effect-btn active" onclick="applyFilter('none')">Normal</button>
-            <button class="effect-btn" onclick="applyFilter('nokia')">Nokia</button>
-            <button class="effect-btn" onclick="applyFilter('vintage')">Vintage</button>
-            <button class="effect-btn" onclick="applyFilter('sony')">Sony</button>
-            <button class="effect-btn" onclick="applyFilter('blue3k')">Blue 3K</button>
-        </div>
-
-        <button class="btn-capture" onclick="takePhoto()">Capture! 💖</button>
     </div>
-</div>
 
 <script src="{% static 'petal/script.js' %}"></script>
 </body>

@@ -12,3 +12,9 @@ def home(request):
         return redirect('home') # Refresh the page after saving
 
     return render(request, 'index.html')
+
+# New function to view the inbox
+def inbox(request):
+    # This grabs all messages and puts the newest ones at the top
+    all_messages = PetalMessage.objects.all().order_by('-id')
+    return render(request, 'petal/inbox.html', {'messages': all_messages})
