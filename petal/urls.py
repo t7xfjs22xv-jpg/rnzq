@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('inbox/', views.inbox, name='inbox'),  # <--- Make sure name='inbox' is here!
 ]

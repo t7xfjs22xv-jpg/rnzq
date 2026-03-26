@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.urls import path, include # Add 'include' here
+from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('petal.urls')), # This links to your petal app
+    path('admin/', admin.site.admin_urls),
+    path('', include('petal.urls')), # This connects everything
 ]
