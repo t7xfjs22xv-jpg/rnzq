@@ -1,19 +1,32 @@
-{% extends 'petal/base.html' %}
-{% block content %}
-<div class="glass-card" style="max-width: 600px;">
-    <h2 class="petal-title">Received Petals 💌</h2>
-    <div class="message-list" style="text-align: left; max-height: 400px; overflow-y: auto;">
-        {% for msg in messages %}
-            <div style="background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; border: 1px solid #ffb6c1;">
-                <strong>From: {{ msg.sender_name }}</strong><br>
-                <p>{{ msg.content }}</p>
-                <small style="color: #ff85a2;">Sent on: {{ msg.created_at }}</small>
-            </div>
-        {% empty %}
-            <p>No messages yet! 🌸</p>
-        {% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox 🎀</title>
+    <link rel="stylesheet" href="/static/petal/style.css"> 
+</head>
+<body style="background-color: #ffe4e8; font-family: 'Quicksand', sans-serif; display: flex; justify-content: center; padding: 20px;">
+
+    <div class="glass-card" style="max-width: 600px; width: 100%; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+        <h2 style="color: #ff85a2; text-align: center;">Received Petals 💌</h2>
+        
+        <div style="margin-top: 20px;">
+            {% for msg in messages %}
+                <div style="background: #fffafa; padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #ffb6c1;">
+                    <strong style="color: #ff85a2;">To: {{ msg.recipient }}</strong>
+                    <p style="margin: 10px 0; color: #444;">{{ msg.message }}</p>
+                    <small style="color: #999;">Sent on: {{ msg.created_at }}</small>
+                </div>
+            {% empty %}
+                <p style="text-align: center; color: #999;">No petals have bloomed here yet. 🌸</p>
+            {% endfor %}
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{% url 'home' %}" style="color: #ff85a2; text-decoration: none; font-weight: bold;">← Back to Home</a>
+        </div>
     </div>
-    <br>
-    <a href="{% url 'home' %}" class="icon-btn" style="font-size: 18px; text-decoration: none;">Go Back</a>
-</div>
-{% endblock %}
+
+</body>
+</html>
